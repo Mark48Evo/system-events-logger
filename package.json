@@ -1,0 +1,48 @@
+{
+  "name": "@mark48evo/system-events-logger",
+  "version": "1.0.0",
+  "description": "A tool to log system wide events to ElasticSearch",
+  "author": "Aurimas Niekis <aurimas@niekis.lt> (https://github.com/Mark48Evo)",
+  "license": "MIT",
+  "repository": "Mark48Evo/system-events-logger",
+  "contributors": [
+    {
+      "name": "Aurimas Niekis",
+      "email": "aurimas@niekis.lt"
+    }
+  ],
+  "scripts": {
+    "rollup": "rollup -c rollup.config.js",
+    "lint": "eslint ./src",
+    "lint-fix": "eslint ./src --fix"
+  },
+  "files": [
+    "bin",
+    "src/",
+    "LICENSE",
+    "README.md"
+  ],
+  "bin": {
+    "system-events-logger": "./bin/systemEventsLogger.js"
+  },
+  "dependencies": {
+    "amqplib": "^0.5.2",
+    "commander": "^2.16.0",
+    "debug": "^3.1.0",
+    "elasticsearch": "^15.1.1",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.51",
+    "@babel/core": "^7.0.0-beta.51",
+    "@babel/node": "^7.0.0-beta.51",
+    "@babel/plugin-external-helpers": "^7.0.0-beta.51",
+    "@babel/preset-env": "^7.0.0-beta.51",
+    "eslint": "^5.0.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "rollup": "^0.61.2",
+    "rollup-plugin-babel": "^4.0.0-beta.7",
+    "rollup-plugin-eslint": "^4.0.0"
+  }
+}

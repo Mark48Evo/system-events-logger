@@ -1,0 +1,12 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "airbnb-base"
+    ],
+    "plugins": [
+        "import"
+    ],
+    "rules": {
+      "no-console": "off"
+    }
+}
