@@ -12,10 +12,10 @@ export default [
       },
     ],
     external: [
+      '@mark48evo/rabbitmq-pubsub',
       'elasticsearch',
       'amqplib',
       'commander',
-      'uuid/v4',
       'debug',
     ],
     plugins: [

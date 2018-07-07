@@ -1,5 +1,5 @@
 import amqplib from 'amqplib';
-import UUIDv4 from 'uuid/v4';
+import RabbitMQPubSub from '@mark48evo/rabbitmq-pubsub';
 import program from 'commander';
 import Debug from 'debug';
 import { Client as ElasticSearch } from 'elasticsearch';
@@ -51,17 +51,12 @@ async function main() {
   const connect = await amqplib.connect('amqp://localhost');
   const channel = await connect.createChannel();
 
-  const consumeQueueName = `${config.rabbitmq.queueNamePrefix}.${UUIDv4()}`;
-
-  await channel.assertExchange(config.rabbitmq.exchangeName, 'fanout', { durable: true });
-  await channel.assertQueue(consumeQueueName, { exclusive: true });
-  await channel.bindQueue(consumeQueueName, config.rabbitmq.exchangeName, '');
+  const pubsub = new RabbitMQPubSub(channel, config.rabbitmq);
+  await pubsub.setup();
 
   debug('System Event Logger Started');
 
-  channel.consume(consumeQueueName, async (rawMessage) => {
-    const message = JSON.parse(rawMessage.content.toString());
-
+  pubsub.on('*', async (message) => {
     try {
       const response = await es.index({
         index: 'system_events',
